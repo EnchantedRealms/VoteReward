@@ -116,6 +116,9 @@ class Main extends PluginBase {
     }
     if($multiplier < 1) {
       $player->sendMessage("§b[§eRBC§b] §cYou §chaven't §cvoted §con §cany §cof §cour §cwebsites! §cVisit §cthe §cwebsites §cbelow §cand §cvote §cfor §cus!");
+      $player->sendMessage("§b-> §eUse §b/vote tutorial §eto find out how to vote!");
+      $player->sendMessage("§d---[§lVOTE LINKS§r§d]---");
+      $player->sendMessage("§a- §bbit.ly/rewardrbc");
       $player->sendMessage("§a- §bbit.ly/rewardrbc");
       $player->sendMessage("§a- §bbit.ly/vote4rbc");
       return;
