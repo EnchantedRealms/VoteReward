@@ -69,7 +69,7 @@ class Main extends PluginBase {
     switch(strtolower($command->getName())) {
       case "vote":
         if(isset($args[0]) && strtolower($args[0]) == "tutorial") {
-          $sender->sendMessage("Steps to vote (TODO)");
+          $sender->sendMessage("§b§lSteps to vote:\n§a1. §r§eVisit our vote website.\n§a§l2.§r§e Type in your username (COMPULSORY).\n§a§l3.§r§e Solve the captcha.\n§a§l4. §r§eClick the VOTE button.\n§a§l5. §r§eCome back to this server and type /vote to earn your reward.");
           break;
         }
         if(isset($args[0]) && strtolower($args[0]) == "reload") {
