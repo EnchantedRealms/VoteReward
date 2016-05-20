@@ -119,8 +119,22 @@ class Main extends PluginBase {
       $player->sendMessage("§b-> §eUse §b/vote tutorial §eto find out how to vote!");
       $player->sendMessage("§d---[§lVOTE LINKS§r§d]---");
       $player->sendMessage("§a- §bbit.ly/rewardrbc");
+      $player->sendMessage("§a- §bbit.ly/vote4rbc");
+      $player->sendMessage("§bVote Count: §c(0/2)");
+      return;
+    }
+    if($multiplier == 1) {
+      $player->sendMessage("§b[§eRBC§b] §cYou have voted on §b1 §cwebsite. §cYou can vote on §banother §cwebsite!");
+      $player->sendMessage("§b-> §eUse §b/vote tutorial §eto find out how to vote!");
+      $player->sendMessage("§d---[§lVOTE LINKS§r§d]---");
       $player->sendMessage("§a- §bbit.ly/rewardrbc");
       $player->sendMessage("§a- §bbit.ly/vote4rbc");
+      $player->sendMessage("§bVote Count: §c(1/2)");
+      return;
+    }
+    if($multiplier > 1) {
+      $player->sendMessage("§b[§eRBC§b] §aThank you for voting on all of our websites! §aYou are awesome! :)");
+      $player->sendMessage("§bVote Count: §a(2/2)");
       return;
     }
     $clones = [];
@@ -161,7 +175,7 @@ class Main extends PluginBase {
       }
       $this->getServer()->getLogger()->info($message);
     }
-    $player->sendMessage("[VoteReward] You voted on $multiplier server list" . ($multiplier == 1 ? "" : "s") . "!");
+    $player->sendMessage("[VoteReward] You voted on $multiplier server!" . ($multiplier == 1 ? "" : "s") . "!");
   }
 
 }
