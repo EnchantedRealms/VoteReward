@@ -68,6 +68,10 @@ class Main extends PluginBase {
   public function onCommand(CommandSender $sender, Command $command, $label, array $args) {
     switch(strtolower($command->getName())) {
       case "vote":
+        if(isset($args[0]) && strtolower($args[0]) == "tutorial") {
+          $sender->sendMessage("Steps to vote (TODO)");
+          break;
+        }
         if(isset($args[0]) && strtolower($args[0]) == "reload") {
           if(Utils::hasPermission($sender, "votereward.command.reload")) {
             $this->reload();
@@ -111,7 +115,9 @@ class Main extends PluginBase {
       return;
     }
     if($multiplier < 1) {
-      $player->sendMessage("[VoteReward] You haven't voted on any server lists!");
+      $player->sendMessage("§b[§eRBC§b] §cYou §chaven't §cvoted §con §cany §cof §cour §cwebsites! §cVisit §cthe §cwebsites §cbelow §cand §cvote §cfor §cus!");
+      $player->sendMessage("§a- §bbit.ly/rewardrbc");
+      $player->sendMessage("§a- §bbit.ly/vote4rbc");
       return;
     }
     $clones = [];
