@@ -14,14 +14,25 @@
 # EssentialsPE style color codes can be used in the message and commands.
 
 # Message to broadcast to the server when a player votes.
-Message: "The player &e{NICKNAME}&r voted with &b/vote&r and got cool rewards!"
+Message: "§b{USERNAME}&7 voted and got§a $$§7, §aItems§7, and §aMore§7!"
 
 # List of items to give players when they vote. Format: ID:Damage:Amount
 Items:
-  - "264:0:5"
-  - "265:0:3"
-  - "364:0:5"
+  - "388:0:2"
+  - "341:0:1"
+  - "298:0:1"
+  - "299:0:1"
+  - "300:0:1"
+  - "301:0:1"
+  - "17:0:10"
+  - "50:0:20"
+  - "4:0:64"
+  - "264:0:9"
+  - "265:0:5"
+  - "364:0:15"
 
 # List of commands to execute when a player votes.
 Commands:
   - "particle portal {X} {Y1} {Z} 2 2 2 10000"
+  - "give {USERNAME} iron_pickaxe 1 {ench:[{id:15s,level:1s}]}"
+  - "givemoney {USERNAME} 1000"
