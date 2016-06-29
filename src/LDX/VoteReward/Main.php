@@ -68,21 +68,37 @@ class Main extends PluginBase {
   public function onCommand(CommandSender $sender, Command $command, $label, array $args) {
     switch(strtolower($command->getName())) {
       case "vote":
+        if(isset($args[0]) && strtolower($args[0]) == "help") {
+          $sender->sendMessage("§e§lVote Help:");
+          $sender->sendMessage("§e/vote help -§7 Displays this!");
+          $sender->sendMessage("§e/vote tutorial -§7 Guide on how to vote!");
+          $sender->sendMessage("§e/vote reload -§7 Reloads the plugin!§b [OP ONLY]");
+          $sender->sendMessage("§e/vote rewards -§7 Displays the rewards from /vote!");
+          break;
+        }
+        if(isset($args[0]) && strtolower($args[0]) == "rewards") {
+          $sender->sendMessage("§e§lVote Rewards:");
+          $sender->sendMessage("§72 Vote Keys, 1 Basic Key, full leather armour, stone sword, iron pickaxe(Efficiency 1), 10 oak logs, 20 torches, 64 cobblestone, 9 diamonds, 5 iron ingots, 15 steak!");
+          break;
+        }
         if(isset($args[0]) && strtolower($args[0]) == "tutorial") {
-          $sender->sendMessage("§b§lSteps to vote:\n§a1. §r§eVisit our vote website.\n§a§l2.§r§e Type in your username (COMPULSORY).\n§a§l3.§r§e Solve the captcha.\n§a§l4. §r§eClick the VOTE button.\n§a§l5. §r§eCome back to this server and type /vote to earn your reward.");
+          $sender->sendMessage("§e§lVote Tutorial:");
+          $sender->sendMessage("§1[1]:§7 Do /vote §b[2]:§7 Visit one of the links on a browser (Google Chrome, Safari, etc) §b[3]:§7 Enter your username §b[4]:§7 Solve the captcha §b[5]:§7 Come back in-game and type§b /vote§7!");
           break;
         }
         if(isset($args[0]) && strtolower($args[0]) == "reload") {
           if(Utils::hasPermission($sender, "votereward.command.reload")) {
             $this->reload();
-            $sender->sendMessage("[VoteReward] All configurations have been reloaded.");
+            $sender->sendMessage("§e§lVote Reload:");
+            $sender->sendMessage("§7Reloaded!");
             break;
           }
-          $sender->sendMessage("You do not have permission to use this subcommand.");
+          $sender->sendMessage("§e§lVote Reload:");
+          $sender->sendMessage("§cOPs only can use this command!");
           break;
         }
         if(!$sender instanceof Player) {
-          $sender->sendMessage("This command must be used in-game.");
+          $sender->sendMessage("This command must be used in-game!");
           break;
         }
         if(!Utils::hasPermission($sender, "votereward.command.vote")) {
@@ -90,7 +106,7 @@ class Main extends PluginBase {
           break;
         }
         if(in_array(strtolower($sender->getName()), $this->queue)) {
-          $sender->sendMessage("[VoteReward] Slow down! We're already checking lists for you.");
+          $sender->sendMessage("§e§lVote§r§e>§7 Loading...");
           break;
         }
         $this->queue[] = strtolower($sender->getName());
@@ -104,7 +120,7 @@ class Main extends PluginBase {
         $this->getServer()->getScheduler()->scheduleAsyncTask($query);
         break;
       default:
-        $sender->sendMessage("Invalid command.");
+        $sender->sendMessage("Invalid command!");
         break;
     }
     return true;
@@ -115,26 +131,26 @@ class Main extends PluginBase {
       return;
     }
     if($multiplier < 1) {
-      $player->sendMessage("§b[§eRBC§b] §cYou §chaven't §cvoted §con §cany §cof §cour §cwebsites! §cVisit §cthe §cwebsites §cbelow §cand §cvote §cfor §cus!");
-      $player->sendMessage("§b-> §eUse §b/vote tutorial §eto find out how to vote!");
-      $player->sendMessage("§d---[§lVOTE LINKS§r§d]---");
-      $player->sendMessage("§a- §bbit.ly/rewardrbc");
-      $player->sendMessage("§a- §bbit.ly/vote4rbc");
-      $player->sendMessage("§bVote Count: §c(0/2)");
+      $player->sendMessage("§eVote>§7 You haven't voted on any of our websites!");
+      $player->sendMessage("§eVote>§7 Use §b/vote help §7to find out how to vote!");
+      $player->sendMessage("§e§lVote Links:");
+      $player->sendMessage("§a- §bbit.ly/erpevote1");
+      $player->sendMessage("§a- §bbit.ly/erpevote2");
+      $player->sendMessage("§eVote Count: §3(§a§l0§r§3/§l§a2§r§3)");
       return;
     }
     if($multiplier == 1) {
-      $player->sendMessage("§b[§eRBC§b] §cYou have voted on §b1 §cwebsite. §cYou can vote on §banother §cwebsite!");
-      $player->sendMessage("§b-> §eUse §b/vote tutorial §eto find out how to vote!");
-      $player->sendMessage("§d---[§lVOTE LINKS§r§d]---");
-      $player->sendMessage("§a- §bbit.ly/rewardrbc");
-      $player->sendMessage("§a- §bbit.ly/vote4rbc");
-      $player->sendMessage("§bVote Count: §c(1/2)");
+      $player->sendMessage("§eVote>§7 You have voted on §b1 §7website. You can vote on another website!");
+      $player->sendMessage("§7 §eUse §b/vote help §eto find out how to vote!");
+      $player->sendMessage("§e§l Vote Links:");
+      $player->sendMessage("§a- §bbit.ly/erpevote1");
+      $player->sendMessage("§a- §bbit.ly/erpevote2");
+      $player->sendMessage("§eVote Count: §3(§a§l1§r§3/§l§a2§r§3)");
       return;
     }
     if($multiplier > 1) {
-      $player->sendMessage("§b[§eRBC§b] §aThank you for voting on all of our websites! §aYou are awesome! :)");
-      $player->sendMessage("§bVote Count: §a(2/2)");
+      $player->sendMessage("§eVote>§a Thank you for voting on all of our websites!");
+      $player->sendMessage("§eVote Count: §3(§a§l2§r§3/§l§a2§r§3)");
       return;
     }
     $clones = [];
@@ -175,7 +191,7 @@ class Main extends PluginBase {
       }
       $this->getServer()->getLogger()->info($message);
     }
-    $player->sendMessage("[VoteReward] You voted on $multiplier server!" . ($multiplier == 1 ? "" : "s") . "!");
+    $player->sendMessage("§eVote>§7 You voted on§b $multiplier §7server!" . ($multiplier == 1 ? "" : "s") . "!");
   }
 
 }
